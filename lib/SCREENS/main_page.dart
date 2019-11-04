@@ -60,20 +60,20 @@ class HomePageState extends State<HomePage>
     return showDialog(
           context: context,
           builder: (context) => new AlertDialog(
-                title: new Text('Are you sure?'),
-                content: new Text('Do you want to close the app?'),
-                actions: <Widget>[
-                  new FlatButton(
-                    onPressed: () => Navigator.of(context).pop(false),
-                    child: new Text('No'),
-                  ),
-                  new FlatButton(
-                    onPressed: () => SystemChannels.platform
-                        .invokeMethod('SystemNavigator.pop'),
-                    child: new Text('Yes'),
-                  ),
-                ],
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to close the app?'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
               ),
+              new FlatButton(
+                onPressed: () =>
+                    SystemChannels.platform.invokeMethod('SystemNavigator.pop'),
+                child: new Text('Yes'),
+              ),
+            ],
+          ),
         ) ??
         false;
   }
@@ -115,9 +115,9 @@ class HomePageState extends State<HomePage>
           body: TabBarView(
             controller: tabController,
             children: [
-              MenuList(),
-              StoreControlPage(),
               Orders(),
+              StoreControlPage(),
+              MenuList(),
             ],
           ),
         ),
@@ -160,13 +160,13 @@ class HomePageState extends State<HomePage>
                   title: Text(shop_name),
                   bottom: TabBar(tabs: [
                     Tab(
-                      icon: Icon(Icons.menu),
+                      icon: Icon(Icons.format_list_bulleted),
                     ),
                     Tab(
                       icon: Icon(Icons.store),
                     ),
                     Tab(
-                      icon: Icon(Icons.format_list_bulleted),
+                      icon: Icon(Icons.menu),
                     ),
                   ]),
                 ),

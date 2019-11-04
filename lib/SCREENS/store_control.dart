@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:shop_app/UI/rating.dart';
-import 'package:snaplist/size_providers.dart';
-import 'package:snaplist/snaplist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+// import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 import 'package:shop_app/crud.dart';
 import 'package:shop_app/vars.dart';
@@ -15,7 +15,6 @@ import 'package:shop_app/vars.dart';
 class StoreControlPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return StoreControlPageState();
   }
 }
@@ -30,11 +29,11 @@ class StoreControlPageState extends State<StoreControlPage>
   bool open = false;
   var earnDataD;
   List<double> earnData = [];
-  final formats = {
-    InputType.both: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
-    InputType.date: DateFormat('yyyy-MM-dd'),
-    InputType.time: DateFormat("HH:mm"),
-  };
+  // final formats = {
+  //   InputType.both: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
+  //   InputType.date: DateFormat('yyyy-MM-dd'),
+  //   InputType.time: DateFormat("HH:mm"),
+  // };
 
   Future<Null> _selectTime(BuildContext context, open, time) async {
     print(time);
@@ -42,33 +41,37 @@ class StoreControlPageState extends State<StoreControlPage>
         hour: num.parse(time.split(":")[0]),
         minute: num.parse(time.split(":")[1]));
     print(initTime);
-    final TimeOfDay picked = await showTimePicker(
-      context: context,
-      initialTime: initTime,
-    );
 
-    if (picked != null && picked != TimeOfDay.now()) {
-      print(picked.toString().substring(10, 15));
-      setState(() {
-        if (open) {
-          Firestore.instance
-              .collection('store_data')
-              .document(store)
-              .updateData({
-            'open_time': picked.toString().substring(10, 15),
-          });
-        } else {
-          Firestore.instance
-              .collection('store_data')
-              .document(store)
-              .updateData({
-            'close_time': picked.toString().substring(10, 15),
-          }).catchError((e) {
-            print(e);
-          });
-        }
-      });
-    }
+    DatePicker.showTimePicker(context, onConfirm: (picked) {
+      if (picked != null && picked != DateTime.now()) {
+        print(picked.toString().substring(10, 16));
+        print(picked.toString());
+        setState(() {
+          if (open) {
+            Firestore.instance
+                .collection('store_data')
+                .document(store)
+                .updateData({
+              'open_time': picked.toString().substring(10, 16),
+            });
+          } else {
+            Firestore.instance
+                .collection('store_data')
+                .document(store)
+                .updateData({
+              'close_time': picked.toString().substring(10, 16),
+            }).catchError((e) {
+              print(e);
+            });
+          }
+        });
+      }
+    });
+
+    // final TimeOfDay picked = await showTimePicker(
+    //   context: context,
+    //   initialTime: initTime,
+    // );
   }
 
   @override
@@ -116,7 +119,7 @@ class StoreControlPageState extends State<StoreControlPage>
                                     'earn_data': earnData,
                                     'earnings': earnings
                                   });
-                                  
+
                                   print(earnings);
                                 });
                               },

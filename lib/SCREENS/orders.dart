@@ -358,8 +358,8 @@ class _OrdersState extends State<Orders> with AutomaticKeepAliveClientMixin {
           if (!snapshot.hasData) return Center(child: Text("Loading..."));
           return Scrollbar(
             child: ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                
+              itemBuilder: (BuildContext context, int s) {
+                int index = snapshot.data.documents.length - s - 1;
                 print('order' + index.toString());
                 if(index == snapshot.data.documents.length - 1){
                   isNewOrder.value = true;
