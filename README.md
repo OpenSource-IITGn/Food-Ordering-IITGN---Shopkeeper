@@ -1,16 +1,21 @@
-# shop_app
+# Food Ordering@IITGN - Shopkeeper App
 
-IITGN Shopapp
+- Application that solves food problems at IITGN
+- This is the shopkeeper app that users can use to make orders from.
+  - Can view incoming orders. 
+  - Money is paid directly to shopkeepers account.
+  - Shopkeeper can adjust availability - disable and enable items that are available at the moment.
+  - Direct and realtime feedback from customer - shopkeeper can see what students like
+  - Powerful charts and analytics for improving profitability
+  - Fully fledged order management system. Receive, pay, and update status of order within the app.
+  - All in real-time :)
 
-## Getting Started
+- This app was made a long time back, and was never deployed due to administrative issues. Open sourcing the code so that someone can take over.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Contributors
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+- Praveen Venkatesh*
+- Nishikant Parmar*
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+*Equal contribution
